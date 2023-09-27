@@ -1,12 +1,11 @@
 import sys
 import scrapers
+import logging
 
 def main():
 
-    locations = scrapers.zapimoveis.get_property_locations()
-
-    for location in locations:
-        print(location)
+    logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+    scrapers.zapimoveis.get_property_locations()
 
 if __name__ == "__main__":
     main()
