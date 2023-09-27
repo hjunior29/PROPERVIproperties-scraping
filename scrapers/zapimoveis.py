@@ -6,7 +6,7 @@ import logging
 from dotenv import load_dotenv
 import os
 
-def get_property_locations():
+def get_properties_data():
     
     try:
         response = requests.get(os.getenv('URL_ZAPIMOVEIS'), headers=utils.headers.get_basic_headers())
@@ -14,7 +14,7 @@ def get_property_locations():
     except requests.exceptions.HTTPError as e:
 
         logging.error(f"Error accessing URL: {e}")
-        return []
+        return None
 
     soup = BeautifulSoup(response.text, 'html.parser')
 
@@ -27,5 +27,5 @@ def get_property_locations():
 
     utils.db_request.add_properties(utils.convert.list_to_dic(addresses, prices))
 
-    return
+    return addresses, prices
 
